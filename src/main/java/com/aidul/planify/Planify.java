@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.aidul.planify;
 
-/**
- *
- * @author FrenzYy
- */
 public class Planify {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        // Logika: Buka form Login dulu, dan tampilkan (setVisible true)
+        // Pastikan kamu sudah Import LoginForm jika diminta, atau ketik manual.
+        
+        LoginForm login = new LoginForm();
+        login.setVisible(true);
+        
+        // Lokasi form akan di tengah layar komputer
+        login.setLocationRelativeTo(null); 
     }
 }

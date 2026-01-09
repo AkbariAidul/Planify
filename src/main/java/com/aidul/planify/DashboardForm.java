@@ -62,8 +62,10 @@ public class DashboardForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_deskripsi = new javax.swing.JTextArea();
         btn_logout = new javax.swing.JButton();
+        btn_selesai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Planify | Dashboard");
 
         lbl_nama_user.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_nama_user.setForeground(new java.awt.Color(51, 51, 51));
@@ -81,6 +83,11 @@ public class DashboardForm extends javax.swing.JFrame {
         });
 
         txt_cari.setPreferredSize(new java.awt.Dimension(73, 40));
+        txt_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_cariKeyReleased(evt);
+            }
+        });
 
         tbl_tugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,6 +115,8 @@ public class DashboardForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_tugas);
 
+        btn_simpan.setBackground(new java.awt.Color(51, 255, 0));
+        btn_simpan.setForeground(new java.awt.Color(255, 255, 255));
         btn_simpan.setText("Simpan");
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +124,8 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btn_ubah.setBackground(new java.awt.Color(255, 153, 0));
+        btn_ubah.setForeground(new java.awt.Color(255, 255, 255));
         btn_ubah.setText("Ubah");
         btn_ubah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +133,8 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 0));
+        btn_hapus.setForeground(new java.awt.Color(255, 255, 255));
         btn_hapus.setText("Hapus");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +142,8 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btn_batal.setBackground(new java.awt.Color(255, 255, 0));
+        btn_batal.setForeground(new java.awt.Color(255, 255, 255));
         btn_batal.setText("Batal");
         btn_batal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +152,11 @@ public class DashboardForm extends javax.swing.JFrame {
         });
 
         txt_deadline.setPreferredSize(new java.awt.Dimension(73, 40));
+        txt_deadline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_deadlineActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Judul:");
@@ -163,11 +183,22 @@ public class DashboardForm extends javax.swing.JFrame {
         btn_logout.setBackground(new java.awt.Color(255, 51, 51));
         btn_logout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_logout.setForeground(new java.awt.Color(255, 255, 255));
-        btn_logout.setText("Logout");
+        btn_logout.setText("Keluar");
         btn_logout.setPreferredSize(new java.awt.Dimension(76, 40));
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logoutActionPerformed(evt);
+            }
+        });
+
+        btn_selesai.setBackground(new java.awt.Color(51, 204, 0));
+        btn_selesai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_selesai.setForeground(new java.awt.Color(255, 255, 255));
+        btn_selesai.setText("Selesai");
+        btn_selesai.setPreferredSize(new java.awt.Dimension(89, 40));
+        btn_selesai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_selesaiActionPerformed(evt);
             }
         });
 
@@ -177,41 +208,44 @@ public class DashboardForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lbl_nama_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(38, 38, 38)
-                            .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(42, 42, 42)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btn_ubah)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btn_batal))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btn_simpan)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btn_hapus))))
-                                .addComponent(txt_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmb_prioritas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel5)
-                                .addComponent(txt_deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(29, 29, 29)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_ubah)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_batal))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_simpan)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_hapus)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cmb_prioritas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(752, 752, 752))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_nama_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(99, 99, 99)
+                                .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_selesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,13 +257,10 @@ public class DashboardForm extends javax.swing.JFrame {
                     .addComponent(lbl_nama_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addComponent(jLabel2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
@@ -250,8 +281,13 @@ public class DashboardForm extends javax.swing.JFrame {
                             .addComponent(btn_hapus))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_ubah)
-                            .addComponent(btn_batal))))
+                            .addComponent(btn_batal)
+                            .addComponent(btn_ubah)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_selesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -259,7 +295,7 @@ public class DashboardForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        new ProfileForm().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -376,6 +412,80 @@ public class DashboardForm extends javax.swing.JFrame {
         kosongkanForm();
     }//GEN-LAST:event_btn_batalActionPerformed
 
+    private void txt_cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cariKeyReleased
+        // Ambil text dari kotak pencarian
+String keyword = txt_cari.getText(); // Pastikan nama variabelnya 'txt_cari'
+javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+model.addColumn("ID");
+model.addColumn("Judul");
+model.addColumn("Deadline");
+model.addColumn("Prioritas");
+model.addColumn("Status");
+model.addColumn("Deskripsi");
+
+tbl_tugas.setModel(model);
+// Sembunyikan kolom ID & Deskripsi lagi
+tbl_tugas.getColumnModel().getColumn(0).setMinWidth(0);
+tbl_tugas.getColumnModel().getColumn(0).setMaxWidth(0);
+tbl_tugas.getColumnModel().getColumn(0).setWidth(0);
+tbl_tugas.getColumnModel().getColumn(5).setMinWidth(0);
+tbl_tugas.getColumnModel().getColumn(5).setMaxWidth(0);
+tbl_tugas.getColumnModel().getColumn(5).setWidth(0);
+
+try {
+    java.sql.Connection conn = DatabaseConnection.connect();
+    // Query dengan LIKE untuk mencari berdasarkan Judul
+    String sql = "SELECT * FROM tasks WHERE user_id = ? AND title LIKE ?";
+    java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+    pst.setInt(1, UserSession.getUserId());
+    pst.setString(2, "%" + keyword + "%"); // % artinya mencari huruf yang mengandung keyword
+    
+    java.sql.ResultSet rs = pst.executeQuery();
+    while (rs.next()) {
+        model.addRow(new Object[] {
+            rs.getInt("id"),
+            rs.getString("title"),
+            rs.getDate("deadline"),
+            rs.getString("priority"),
+            rs.getString("status"),
+            rs.getString("description")
+        });
+    }
+} catch (Exception e) {
+    System.out.println("Error Cari: " + e.getMessage());
+}
+    }//GEN-LAST:event_txt_cariKeyReleased
+
+    private void btn_selesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selesaiActionPerformed
+        int baris = tbl_tugas.getSelectedRow();
+if (baris == -1) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Pilih tugas yang mau diselesaikan!");
+    return;
+}
+
+try {
+    String idTugas = tbl_tugas.getValueAt(baris, 0).toString();
+    
+    // Update status jadi 'Selesai'
+    String sql = "UPDATE tasks SET status='Selesai' WHERE id=?";
+    java.sql.Connection conn = DatabaseConnection.connect();
+    java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+    pst.setString(1, idTugas);
+    
+    pst.execute();
+    javax.swing.JOptionPane.showMessageDialog(this, "Selamat! Tugas Selesai.");
+    tampilkanData(); // Refresh tabel biar status berubah jadi 'Selesai'
+    kosongkanForm();
+    
+} catch (Exception e) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Gagal: " + e.getMessage());
+}
+    }//GEN-LAST:event_btn_selesaiActionPerformed
+
+    private void txt_deadlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_deadlineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_deadlineActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +515,7 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_batal;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_selesai;
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_ubah;
     private javax.swing.JComboBox<String> cmb_prioritas;

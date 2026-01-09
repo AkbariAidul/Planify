@@ -6,6 +6,15 @@ package com.aidul.planify;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +24,8 @@ public class ProfileForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProfileForm.class.getName());
 
-    /**
-     * Creates new form ProfileForm
-     */
+    private File fileFoto = null; // Untuk menyimpan file sementara
+    
     public ProfileForm() {
         initComponents();
         setVisible(true);
@@ -26,6 +34,8 @@ public class ProfileForm extends javax.swing.JFrame {
         //        import icon
         Image icon = new ImageIcon("D:\\D3_TEKNIK_INFORMATIKA\\SEMESTER 3 (TIGA)\\PEMROGRAMAN VISUAL\\Planify\\src\\main\\resources\\icons/logo_planify.png").getImage();
         this.setIconImage(icon);
+        
+        loadDataProfil();
     }
 
     /**
@@ -37,21 +47,197 @@ public class ProfileForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbl_foto_profil = new javax.swing.JLabel();
+        btn_pilih_foto = new javax.swing.JButton();
+        txt_profil_nama = new javax.swing.JTextField();
+        txt_pass_baru = new javax.swing.JPasswordField();
+        btn_simpan_profil = new javax.swing.JButton();
+        btn_tutup = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Planify | Profile");
+
+        lbl_foto_profil.setBackground(new java.awt.Color(153, 255, 153));
+        lbl_foto_profil.setToolTipText("");
+        lbl_foto_profil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        lbl_foto_profil.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        btn_pilih_foto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_pilih_foto.setText("Pilih Foto");
+        btn_pilih_foto.setPreferredSize(new java.awt.Dimension(94, 40));
+        btn_pilih_foto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pilih_fotoActionPerformed(evt);
+            }
+        });
+
+        txt_profil_nama.setEditable(false);
+        txt_profil_nama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_profil_nama.setPreferredSize(new java.awt.Dimension(64, 40));
+
+        txt_pass_baru.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_pass_baru.setPreferredSize(new java.awt.Dimension(64, 40));
+
+        btn_simpan_profil.setBackground(new java.awt.Color(0, 204, 0));
+        btn_simpan_profil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_simpan_profil.setForeground(new java.awt.Color(255, 255, 255));
+        btn_simpan_profil.setText("Simpan Perubahan");
+        btn_simpan_profil.setPreferredSize(new java.awt.Dimension(149, 40));
+        btn_simpan_profil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpan_profilActionPerformed(evt);
+            }
+        });
+
+        btn_tutup.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_tutup.setText("Tutup");
+        btn_tutup.setPreferredSize(new java.awt.Dimension(72, 40));
+        btn_tutup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tutupActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Ganti Password:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(94, 27));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("NamaLengkap:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(94, 27));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 364, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_profil_nama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_pass_baru, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(lbl_foto_profil, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_tutup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(btn_simpan_profil, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(361, 361, 361))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(434, 434, 434)
+                .addComponent(btn_pilih_foto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lbl_foto_profil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_pilih_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_profil_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_pass_baru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_tutup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_simpan_profil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(167, 167, 167))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_pilih_fotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pilih_fotoActionPerformed
+        JFileChooser chooser = new JFileChooser();
+
+// Filter: Hanya menampilkan file gambar (JPG, PNG)
+chooser.setFileFilter(new FileNameExtensionFilter("Gambar JPG & PNG", "jpg", "png", "jpeg"));
+
+int hasil = chooser.showOpenDialog(this);
+if (hasil == JFileChooser.APPROVE_OPTION) {
+    // 1. Ambil file yang dipilih user
+    fileFoto = chooser.getSelectedFile();
+    
+    // 2. Tampilkan di Label (Preview)
+    // Kita buat logic resize biar gambarnya pas di kotak
+    ImageIcon icon = new ImageIcon(fileFoto.getAbsolutePath());
+    Image img = icon.getImage().getScaledInstance(lbl_foto_profil.getWidth(), lbl_foto_profil.getHeight(), Image.SCALE_SMOOTH);
+    
+    lbl_foto_profil.setIcon(new ImageIcon(img));
+    lbl_foto_profil.setText(""); // Hapus teks "jLabel.."
+}
+    }//GEN-LAST:event_btn_pilih_fotoActionPerformed
+
+    private void btn_simpan_profilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_profilActionPerformed
+        try {
+    String passBaru = new String(txt_pass_baru.getPassword());
+    String pathFotoDB = null; // Ini string yang akan disimpan ke database
+    
+    // 1. Cek apakah user upload foto baru?
+    if (fileFoto != null) {
+        // Buat folder "images" jika belum ada
+        File folder = new File("images");
+        if (!folder.exists()) folder.mkdir();
+        
+        // Copy file foto ke folder "images" di project
+        File dest = new File("images/" + fileFoto.getName());
+        Files.copy(fileFoto.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        
+        // Simpan nama filenya saja untuk database
+        pathFotoDB = "images/" + fileFoto.getName();
+    }
+    
+    // 2. Siapkan Query Update
+    Connection conn = DatabaseConnection.connect();
+    String sql;
+    
+    // Logika: Jika foto diupload, update foto & password. Jika tidak, update password saja.
+    if (pathFotoDB != null) {
+        sql = "UPDATE users SET password=?, photo_path=? WHERE id=?";
+    } else {
+        sql = "UPDATE users SET password=? WHERE id=?";
+    }
+    
+    PreparedStatement pst = conn.prepareStatement(sql);
+    
+    // 3. Isi Parameter Query
+    if (pathFotoDB != null) {
+        pst.setString(1, passBaru);
+        pst.setString(2, pathFotoDB);
+        pst.setInt(3, UserSession.getUserId());
+    } else {
+        pst.setString(1, passBaru);
+        pst.setInt(2, UserSession.getUserId());
+    }
+    
+    // 4. Eksekusi
+    pst.execute();
+    JOptionPane.showMessageDialog(this, "Profil Berhasil Diupdate!");
+    
+    // Reset Form
+    this.dispose(); // Tutup profil
+    
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(this, "Gagal Update: " + e.getMessage());
+}
+    }//GEN-LAST:event_btn_simpan_profilActionPerformed
+
+    private void btn_tutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tutupActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_tutupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +265,45 @@ public class ProfileForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_pilih_foto;
+    private javax.swing.JButton btn_simpan_profil;
+    private javax.swing.JButton btn_tutup;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbl_foto_profil;
+    private javax.swing.JPasswordField txt_pass_baru;
+    private javax.swing.JTextField txt_profil_nama;
     // End of variables declaration//GEN-END:variables
+
+private void loadDataProfil() {
+    // 1. Set Nama User (Hanya Tampil)
+    txt_profil_nama.setText(UserSession.getUserName());
+    
+    // 2. Ambil Foto dari Database
+    try {
+        Connection conn = DatabaseConnection.connect();
+        String sql = "SELECT photo_path FROM users WHERE id=?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, UserSession.getUserId());
+        java.sql.ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()) {
+            String path = rs.getString("photo_path");
+            
+            // Jika ada path foto di database, tampilkan
+            if (path != null && !path.isEmpty()) {
+                File f = new File(path);
+                if (f.exists()) {
+                    ImageIcon icon = new ImageIcon(path);
+                    Image img = icon.getImage().getScaledInstance(lbl_foto_profil.getWidth(), lbl_foto_profil.getHeight(), Image.SCALE_SMOOTH);
+                    lbl_foto_profil.setIcon(new ImageIcon(img));
+                    lbl_foto_profil.setText("");
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Error Load Profil: " + e.getMessage());
+    }
+}
+
 }

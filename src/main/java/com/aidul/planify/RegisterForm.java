@@ -50,7 +50,7 @@ public class RegisterForm extends javax.swing.JFrame {
         txt_reg_pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Planify App");
+        setTitle("Planify App - Daftar");
         setBackground(new java.awt.Color(0, 153, 153));
 
         txt_reg_nama.setToolTipText("");
